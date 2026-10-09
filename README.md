@@ -1,5 +1,22 @@
 # go-sqlite-backup
 
+## Maintenance moved to `github.com/hollis-labs/libs/util`
+
+This standalone repository is retired. Maintained source and documentation are
+in [github.com/hollis-labs/libs/util/sqlitebackup](https://github.com/hollis-labs/libs/tree/util%2Fv0.1.0/util/sqlitebackup), released in **`util/v0.1.0`**.
+Install the replacement module:
+
+```sh
+go get github.com/hollis-labs/libs/util@v0.1.0
+```
+
+Replace the `github.com/hollis-labs/go-sqlite-backup` import prefix with
+`github.com/hollis-labs/libs/util/sqlitebackup`, retaining the package subpath. Review the replacement documentation
+for any API changes before migrating. Existing standalone tags and history remain
+available; old module pins do not automatically redirect to the new module.
+
+The documentation below describes historical standalone usage.
+
 Safe SQLite backup, verify and restore over database/sql: VACUUM INTO, integrity check, checksum, atomic rename.
 
 Three functions and nothing else. `Backup` snapshots a live database with `VACUUM INTO` (never a raw file copy), reopens the snapshot read-only, runs `PRAGMA integrity_check`, takes a SHA-256 checksum, and only then atomically publishes it. `Verify` re-checks a backup file later. `Restore` verifies a backup, stages it, runs an optional caller-supplied check, and swaps it into place atomically while keeping the file it replaced.
